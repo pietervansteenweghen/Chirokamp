@@ -2,26 +2,62 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Cute Kitten</title>
+  <title>Chirokamp Countdown</title>
   <style>
     body {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
       background-color: #fce4ec;
-      font-family: sans-serif;
+      font-family: Arial, sans-serif;
+      text-align: center;
     }
     img {
       max-width: 90%;
-      height: auto;
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      margin-bottom: 30px;
+    }
+    #countdown {
+      font-size: 2em;
+      color: #333;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
+
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/VAN_CAT.png/640px-VAN_CAT.png" alt="A cute kitten">
+  <div id="countdown">Loading countdown...</div>
+
+  <script>
+    // Target date: August 4, 2025 at 10:00 AM in Belgium (CEST, UTC+2)
+    const targetDate = new Date("2025-08-04T08:00:00Z"); // 10:00 CEST = 08:00 UTC
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").textContent = "Het kamp is begonnen! 🎉";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("countdown").textContent =
+        `${days} dagen ${hours} uur ${minutes} min ${seconds} sec`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+
 </body>
 </html>
