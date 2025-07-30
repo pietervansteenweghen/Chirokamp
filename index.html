@@ -1,63 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Chirokamp Countdown</title>
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #fce4ec;
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-    img {
-      max-width: 90%;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
-      margin-bottom: 30px;
-    }
-    #countdown {
-      font-size: 2em;
-      color: #333;
-      font-weight: bold;
-    }
-  </style>
-</head>
-<body>
-
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/VAN_CAT.png/640px-VAN_CAT.png" alt="A cute kitten">
-  <div id="countdown">Loading countdown...</div>
-
-  <script>
-    // Target date: August 4, 2025 at 10:00 AM in Belgium (CEST, UTC+2)
-    const targetDate = new Date("2025-08-04T08:00:00Z"); // 10:00 CEST = 08:00 UTC
-
-    function updateCountdown() {
-      const now = new Date();
-      const diff = targetDate - now;
-
-      if (diff <= 0) {
-        document.getElementById("countdown").textContent = "Het kamp is begonnen! 🎉";
-        return;
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Chirokamp Countdown</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <style>
+      body::before {
+        content: "";
+        background-image: url('70577768_2405063153154873_3237624262726516736_o.jpg');
+        background-size: cover;
+        background-position: center;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        opacity: 0.8;
       }
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
+      #countdown {
+        font-size: 2em;
+        color: #ffffff;
+        font-weight: bold;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 1rem 2rem;
+        border-radius: 1rem;
+        margin-top: 1em;
+      }
+    </style>
+  </head>
+  <body class="is-preload">
 
-      document.getElementById("countdown").textContent =
-        `${days} dagen ${hours} uur ${minutes} min ${seconds} sec`;
-    }
+    <!-- Wrapper -->
+    <div id="wrapper">
 
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-  </script>
+      <!-- Main -->
+      <section id="main">
+        <header>
+          <h1>Chirokamp</h1>
+          <p id="countdown">Laden...</p>
+        </header>
+      </section>
 
-</body>
+      <!-- Footer -->
+      <footer id="footer">
+        <p>&copy; Chirokamp 2025</p>
+      </footer>
+    </div>
+
+    <script>
+      const targetDate = new Date("2025-08-04T08:00:00Z");
+
+      function updateCountdown() {
+        const now = new Date();
+        const diff = targetDate - now;
+
+        if (diff <= 0) {
+          document.getElementById("countdown").textContent = "Het kamp is begonnen! 🎉";
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        document.getElementById("countdown").textContent =
+          `${days} dagen ${hours} uur ${minutes} min ${seconds} sec`;
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    </script>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+  </body>
 </html>
