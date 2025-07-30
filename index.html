@@ -9,7 +9,7 @@
     <style>
       body::before {
         content: "";
-        background-image: url('70577768_2405063153154873_3237624262726516736_o.jpg');
+        background-image: url('ChatGPTImageJul29202509_52_54PM.jpg');
         background-size: cover;
         background-position: center;
         position: fixed;
@@ -21,6 +21,14 @@
         opacity: 0.8;
       }
 
+      #main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
       #countdown {
         font-size: 2em;
         color: #ffffff;
@@ -28,7 +36,11 @@
         background: rgba(0, 0, 0, 0.5);
         padding: 1rem 2rem;
         border-radius: 1rem;
-        margin-top: 1em;
+        text-align: center;
+      }
+
+      footer {
+        display: none;
       }
     </style>
   </head>
@@ -39,16 +51,9 @@
 
       <!-- Main -->
       <section id="main">
-        <header>
-          <h1>Chirokamp</h1>
-          <p id="countdown">Laden...</p>
-        </header>
+        <p id="countdown">Even geduld...</p>
       </section>
 
-      <!-- Footer -->
-      <footer id="footer">
-        <p>&copy; Chirokamp 2025</p>
-      </footer>
     </div>
 
     <script>
