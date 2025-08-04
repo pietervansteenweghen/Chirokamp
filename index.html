@@ -79,20 +79,23 @@
     <script>
       const prankStart = new Date("2025-08-04T08:00:00Z"); // 10:00 CEST
       const prankEnd = new Date("2025-08-04T10:00:00Z");   // 12:00 CEST
+      const finalRedirect = "https://youtu.be/EyoKlF6gWjs";
 
       function updateCountdown() {
         const now = new Date();
+
+        if (now >= prankEnd) {
+          // After 12:00 — redirect to your final YouTube link
+          window.location.href = finalRedirect;
+          return;
+        }
+
         let targetDate;
         let prankMode = false;
 
         if (now >= prankStart && now < prankEnd) {
           targetDate = prankEnd;
           prankMode = true;
-        } else if (now >= prankEnd) {
-          document.getElementById("countdown").textContent = "Het kamp is begonnen! 🎉";
-          document.getElementById("prank").textContent = "";
-          document.getElementById("rickroll").style.display = "none";
-          return;
         } else {
           targetDate = prankStart;
         }
@@ -108,10 +111,10 @@
           `${days} dagen ${hours} uur ${minutes} min ${seconds} sec`;
 
         if (prankMode) {
-          document.getElementById("prank").textContent = "Prankkk jullie hadden toch niet verwacht dat dit op tijd ging zijn";
+          document.getElementById("prank").textContent = "Prankkk jullie dachten toch niet verwacht dat dit op tijd ging zijn";
           document.getElementById("rickroll").style.display = "block";
         } else {
-          document.getElementById("prank").textContent = "";
+          document.getElementById("prank").textContent = ""; Male Speaker 1. 
           document.getElementById("rickroll").style.display = "none";
         }
       }
@@ -128,4 +131,3 @@
     <script src="assets/js/main.js"></script>
   </body>
 </html>
-
