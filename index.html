@@ -27,6 +27,8 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
+        text-align: center;
+        padding: 2rem;
       }
 
       #countdown {
@@ -39,34 +41,63 @@
         text-align: center;
       }
 
-      footer {
+      #prank {
+        color: white;
+        font-size: 1.5em;
+        margin-top: 1em;
+      }
+
+      #rickroll {
         display: none;
+        margin-top: 2rem;
+        border: 5px solid white;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
       }
     </style>
   </head>
   <body class="is-preload">
-
     <!-- Wrapper -->
     <div id="wrapper">
-
       <!-- Main -->
       <section id="main">
         <p id="countdown">Even geduld...</p>
+        <p id="prank"></p>
+        <div id="rickroll">
+          <iframe width="560" height="315"
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1"
+            title="Rick Astley - Never Gonna Give You Up"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+            allowfullscreen>
+          </iframe>
+        </div>
       </section>
-
     </div>
 
+    <!-- Countdown Script -->
     <script>
-      const targetDate = new Date("2025-08-04T08:00:00Z");
+      const prankStart = new Date("2025-08-04T08:00:00Z"); // 10:00 CEST
+      const prankEnd = new Date("2025-08-04T10:00:00Z");   // 12:00 CEST
 
       function updateCountdown() {
         const now = new Date();
-        const diff = targetDate - now;
+        let targetDate;
+        let prankMode = false;
 
-        if (diff <= 0) {
+        if (now >= prankStart && now < prankEnd) {
+          targetDate = prankEnd;
+          prankMode = true;
+        } else if (now >= prankEnd) {
           document.getElementById("countdown").textContent = "Het kamp is begonnen! 🎉";
+          document.getElementById("prank").textContent = "";
+          document.getElementById("rickroll").style.display = "none";
           return;
+        } else {
+          targetDate = prankStart;
         }
+
+        const diff = targetDate - now;
 
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
@@ -75,17 +106,25 @@
 
         document.getElementById("countdown").textContent =
           `${days} dagen ${hours} uur ${minutes} min ${seconds} sec`;
+
+        if (prankMode) {
+          document.getElementById("prank").textContent = "you have been pranked 😈";
+          document.getElementById("rickroll").style.display = "block";
+        } else {
+          document.getElementById("prank").textContent = "";
+          document.getElementById("rickroll").style.display = "none";
+        }
       }
 
       updateCountdown();
       setInterval(updateCountdown, 1000);
     </script>
 
+    <!-- Scripts from template -->
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/browser.min.js"></script>
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
-
   </body>
 </html>
