@@ -24,11 +24,19 @@
       #main {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
-        height: 100vh;
+        min-height: 100vh;
         text-align: center;
         padding: 2rem;
+      }
+
+      #title {
+        font-size: 2.2em;
+        color: #ffffff;
+        margin-bottom: 1rem;
+        font-weight: bold;
+        text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
       }
 
       #countdown {
@@ -47,12 +55,32 @@
         margin-top: 1em;
       }
 
-      #rickroll {
+      .video-container {
         display: none;
-        margin-top: 2rem;
-        border: 5px solid white;
+        flex-direction: column;
+        align-items: center;
+        gap: 2.5rem;
+        margin-top: 3rem;
+      }
+
+      iframe, video {
+        width: 90%;
+        max-width: 700px;
         border-radius: 10px;
         box-shadow: 0 0 20px rgba(255,255,255,0.3);
+      }
+
+      .label {
+        color: white;
+        font-size: 1.3em;
+        margin-bottom: 0.3rem;
+      }
+
+      .link {
+        font-size: 1em;
+        color: #aee6ff;
+        text-decoration: underline;
+        margin-bottom: 0.8rem;
       }
     </style>
   </head>
@@ -61,16 +89,35 @@
     <div id="wrapper">
       <!-- Main -->
       <section id="main">
+        <div id="title"> Kobeee, Cisssse & Pokus + some AI present </div>
         <p id="countdown">Even geduld...</p>
         <p id="prank"></p>
-        <div id="rickroll">
-          <iframe width="560" height="315"
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1"
-            title="Rick Astley - Never Gonna Give You Up"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-            allowfullscreen>
-          </iframe>
+
+        <!-- Final videos (visible after 12:00) -->
+        <div id="videos" class="video-container">
+          <!-- YouTube version -->
+          <div>
+            <div class="label">Normal version:</div>
+            <div class="link">
+              <a href="https://youtu.be/EyoKlF6gWjs" target="_blank">https://youtu.be/EyoKlF6gWjs</a>
+            </div>
+            <iframe
+              src="https://www.youtube.com/embed/EyoKlF6gWjs"
+              title="Main video"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <!-- Anime version -->
+          <div>
+            <div class="label">Japanese anime version:</div>
+            <video controls>
+              <source src="https://1drv.ms/v/c/37ed7a6e9f2949a6/EQ5UPobsmGFFiuIoBcKCaNcBq_TB9c7mUr-YD8t2Sqe4AA?e=ueXSbg" type="video/mp4">
+              Your browser does not support this video.
+            </video>
+          </div>
         </div>
       </section>
     </div>
@@ -79,14 +126,15 @@
     <script>
       const prankStart = new Date("2025-08-04T08:00:00Z"); // 10:00 CEST
       const prankEnd = new Date("2025-08-04T10:00:00Z");   // 12:00 CEST
-      const finalRedirect = "https://youtu.be/EyoKlF6gWjs";
 
       function updateCountdown() {
         const now = new Date();
 
         if (now >= prankEnd) {
-          // After 12:00 — redirect to your final YouTube link
-          window.location.href = finalRedirect;
+          // Final state: show both videos
+          document.getElementById("countdown").style.display = "none";
+          document.getElementById("prank").style.display = "none";
+          document.getElementById("videos").style.display = "flex";
           return;
         }
 
@@ -111,11 +159,9 @@
           `${days} dagen ${hours} uur ${minutes} min ${seconds} sec`;
 
         if (prankMode) {
-          document.getElementById("prank").textContent = "Prankkk jullie dachten toch niet verwacht dat dit op tijd ging zijn";
-          document.getElementById("rickroll").style.display = "block";
+          document.getElementById("prank").textContent = "Prankkk jullie dachten toch niet dat dit op tijd klaar ging zijn";
         } else {
-          document.getElementById("prank").textContent = ""; Male Speaker 1. 
-          document.getElementById("rickroll").style.display = "none";
+          document.getElementById("prank").textContent = "";
         }
       }
 
